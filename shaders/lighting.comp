@@ -1,0 +1,53 @@
+#version 460 core
+
+layout (local_size_x = 16, local_size_y = 16) in;
+
+layout (rgba8, binding = 0) uniform image2D destTex;
+
+uniform sampler2D gPosition;
+uniform sampler2D gNormal;
+uniform sampler2D gAlbedo;
+
+uniform vec3 lightPos;
+uniform vec3 lightColor;
+uniform vec3 viewPos;
+
+void main() {
+    ivec2 texelPos = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 size = imageSize(destTex);
+
+    if (texelPos.x >= size.x || texelPos.y >= size.y) {
+        return;
+    }
+
+    vec2 texCoords = (vec2(texelPos) + vec2(0.5)) / vec2(size);
+
+    // Fetch G-Buffer Data directly using texelFetch for precision
+    vec3 FragPos = texelFetch(gPosition, texelPos, 0).rgb;
+    vec3 Normal = texelFetch(gNormal, texelPos, 0).rgb;
+    vec4 AlbedoSpec = texelFetch(gAlbedo, texelPos, 0);
+    vec3 Diffuse = AlbedoSpec.rgb;
+    float Specular = AlbedoSpec.a;
+
+    // Lighting Calculation
+    // Ambient
+    float ambientStrength = 0.1;
+    vec3 ambient = ambientStrength * Diffuse;
+
+    // Diffuse
+    vec3 norm = normalize(Normal);
+    vec3 lightDir = normalize(lightPos - FragPos);
+    float diff = max(dot(norm, lightDir), 0.0);
+    vec3 diffuse = diff * Diffuse * lightColor;
+
+    // Specular
+    float specularStrength = 0.5;
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = specularStrength * spec * lightColor * Specular; 
+
+    vec3 result = ambient + diffuse + specular;
+
+    imageStore(destTex, texelPos, vec4(result, 1.0));
+}
