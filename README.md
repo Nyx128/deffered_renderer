@@ -31,15 +31,15 @@ We need GLAD to load OpenGL 4.6 function pointers and extensions.
 1. Click the link above.
 2. Click **Generate**.
 3. Download the zip file.
-4. Copy `include/glad` and `include/KHR` folders to `c:/dev/graphics/scene_tree/include/`.
-5. Copy `src/glad.c` to `c:/dev/graphics/scene_tree/src/`.
+4. Copy `include/glad` and `include/KHR` folders to `/deffered_renderer/include/`.
+5. Copy `src/glad.c` to `/deffered_renderer/src/`.
 
 ### 2. GLFW
 1. Download the **Windows Pre-compiled Binaries** (32-bit or 64-bit depending on your MinGW/g++ version) from [glfw.org](https://www.glfw.org/download.html).
 2. Extract the archive.
-3. Copy the contents of the `include` folder (the `GLFW` folder) into `c:/dev/graphics/scene_tree/include/`.
+3. Copy the contents of the `include` folder (the `GLFW` folder) into `/deffered_renderer/include/`.
    - You should have `c:/dev/graphics/scene_tree/include/GLFW/glfw3.h`.
-4. Copy the `libglfw3.a` file from the `lib-mingw-w64` (or similar) folder into `c:/dev/graphics/scene_tree/lib/`.
+4. Copy the `libglfw3.a` file from the `lib-mingw-w64` (or similar) folder into `/deffered_renderer/lib/`.
    - **Important**: Do NOT copy `libglfw3dll.a` or `glfw3.dll`. We are using static linking.
 
 ### 2. Build
