@@ -1,3 +1,13 @@
+# Deferred Renderer
+
+## Project Description
+A deferred rendering engine designed to handle advanced graphics techniques with optimal performance. This project supports features such as multi-pass rendering, dynamic scene management, and advanced lighting effects.
+
+## Features
+- **Multi-pass Rendering:** Efficiently render complex scenes by separating rendering tasks into passes.
+- **Dynamic Scene Management:** Manage and render scenes dynamically in real time.
+
+
 # Project Setup Instructions
 
 ## Dependencies
