@@ -58,3 +58,7 @@ Execute the generated application:
 ```bash
 app.exe
 ```
+
+## Example
+### DragonAttenuation.glb
+![Demo Output](demo_ouput.png)
