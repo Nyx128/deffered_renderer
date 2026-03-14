@@ -5,6 +5,11 @@ A deferred rendering engine designed to handle advanced graphics techniques with
 
 ## Features
 - **Multi-pass Rendering:** Efficiently render complex scenes by separating rendering tasks into passes.
+  ```cpp
+  pipeline.add_pass(std::make_unique<render::geometry_pass>(dragon.get(), &cam, &geometry_shader));
+  pipeline.add_pass(std::make_unique<render::lighting_pass>(&cam, WINDOW_WIDTH, WINDOW_HEIGHT));
+  //add any passes, after customising them, or make our own passes
+  ```
 - **Dynamic Scene Management:** Manage and render scenes dynamically in real time.
 
 
